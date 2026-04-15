@@ -573,9 +573,42 @@ function startOb(){
   window.scrollTo({top:document.getElementById('form-sec').offsetTop-80,behavior:'smooth'});
 }
 
+function saveToAirtable(data){
+  var notes=[
+    'Email: '+data.email,
+    'Who: '+data.who,
+    'Country: '+data.country,
+    'Stage: '+data.stage,
+    'Budget: '+data.budget,
+    'Date: '+new Date().toISOString().split('T')[0]
+  ].join('
+');
+  fetch('https://api.airtable.com/v0/appXWZeg1ZkVLD8Dl/Table%201',{
+    method:'POST',
+    headers:{
+      'Authorization':'Bearer pateoD4xShzMIvtfL.54cf4759792ddf5de5cc754fa41201e15f0851d4a4e06107b2e799eab827053a',
+      'Content-Type':'application/json'
+    },
+    body:JSON.stringify({fields:{'Name':data.name,'Notes':notes}})
+  }).then(function(r){return r.json()}).then(function(d){console.log('Airtable saved:',d)}).catch(function(e){console.log('Airtable error:',e)});
+}
+
 function showAnalytics(){
   document.getElementById('ob-wrap').style.display='none';
   document.getElementById('analytics-wrap').style.display='block';
+
+  var whoLabels=['solo dad','solo mom','same-sex couple','couple'];
+  var countryLabels=['israel','united states','israel + usa'];
+  var stageLabels=['just researching','fertility testing','egg donor selected','looking for a surrogate','surrogate matched'];
+  var budgetLabels=['no idea','rough idea','know main costs','track everything'];
+  saveToAirtable({
+    name:document.getElementById('f-name').value.trim(),
+    email:document.getElementById('f-email').value.trim(),
+    who:whoLabels[answers.who],
+    country:countryLabels[answers.country],
+    stage:stageLabels[answers.stage],
+    budget:budgetLabels[answers.budget]
+  });
 
   var whoLabels=['solo dad','solo mom','same-sex couple','couple'];
   var countryLabels=['israel','united states','israel + usa'];
