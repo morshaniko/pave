@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pave.io — pave your path to parenthood.</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,200;1,6..72,300;1,6..72,400;1,6..72,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#534AB7;--pl:#EEEDFE;--pm:#AFA9EC;--pd:#3C3489;
+  --g:#1D9E75;--gl:#E1F5EE;--gd:#085041;
+  --a:#BA7517;--al:#FAEEDA;
+  --nb:#1A1A18;--wg:#6A6A67;--lg:#AEADA9;
+  --border:rgba(0,0,0,0.07);
+  --cream:#F7F5F0;--cd:#EFECE5;--white:#FFFFFF;
+  --serif:'Newsreader',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--cream);color:var(--nb);-webkit-font-smoothing:antialiased}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(247,245,240,0.94);backdrop-filter:blur(16px);border-bottom:0.5px solid var(--border);padding:0 3rem;height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--serif);font-size:20px;font-weight:300;letter-spacing:3px;color:var(--nb);text-decoration:none}
+.nav-logo .io{color:var(--p);font-size:11px;vertical-align:super;letter-spacing:1px}
+.nav-r{display:flex;align-items:center;gap:1.5rem}
+.nav-count{font-size:12px;color:var(--wg);display:flex;align-items:center;gap:6px}
+.nav-count-dot{width:6px;height:6px;border-radius:50%;background:var(--g)}
+.nav-cta{padding:9px 22px;background:var(--nb);color:white;border:none;border-radius:100px;font-family:var(--sans);font-size:13px;cursor:pointer;transition:background 0.2s}
+.nav-cta:hover{background:#333}
+
+/* ── HERO ── */
+.hero{min-height:92vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5rem 2rem 4rem;position:relative;overflow:hidden}
+.hero-blob1{position:absolute;top:-150px;right:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(83,74,183,0.07) 0%,transparent 70%);pointer-events:none}
+.hero-blob2{position:absolute;bottom:-100px;left:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(29,158,117,0.06) 0%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:var(--white);border:0.5px solid var(--border);border-radius:100px;padding:6px 16px;font-size:12px;color:var(--wg);margin-bottom:2.5rem;opacity:0;animation:up 0.8s 0.05s cubic-bezier(0.16,1,0.3,1) forwards}
+.hero-badge-dot{width:5px;height:5px;border-radius:50%;background:var(--p)}
+.hero-wm{font-family:var(--serif);font-size:clamp(60px,12vw,110px);font-weight:200;letter-spacing:-0.01em;color:var(--nb);line-height:1.02;margin-bottom:14px;opacity:0;animation:up 0.9s 0.12s cubic-bezier(0.16,1,0.3,1) forwards}
+.hero-wm .io{color:var(--p);font-size:0.36em;vertical-align:super;letter-spacing:1px}
+.hero-rule{width:36px;height:0.5px;background:var(--p);margin:0 auto 18px;opacity:0;animation:up 0.8s 0.2s cubic-bezier(0.16,1,0.3,1) forwards}
+.hero-slogan{font-family:var(--serif);font-size:clamp(17px,2.5vw,21px);font-weight:300;font-style:italic;color:var(--wg);letter-spacing:0.06em;margin-bottom:1.75rem;opacity:0;animation:up 0.8s 0.25s cubic-bezier(0.16,1,0.3,1) forwards}
+.hero-sub{font-size:17px;line-height:1.85;color:var(--wg);max-width:460px;margin:0 auto 3rem;font-weight:300;opacity:0;animation:up 0.8s 0.32s cubic-bezier(0.16,1,0.3,1) forwards}
+.hero-btns{display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:up 0.8s 0.4s cubic-bezier(0.16,1,0.3,1) forwards}
+.btn-hero{padding:16px 38px;background:var(--nb);color:white;border:none;border-radius:100px;font-family:var(--sans);font-size:15px;cursor:pointer;transition:background 0.2s,transform 0.1s}
+.btn-hero:hover{background:#2a2a28}.btn-hero:active{transform:scale(0.99)}
+.btn-ghost{font-size:13px;color:var(--lg);background:none;border:none;cursor:pointer;font-family:var(--sans);transition:color 0.15s}
+.btn-ghost:hover{color:var(--wg)}
+
+/* ── STATS BAR ── */
+.stats-bar{background:var(--white);border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border);padding:2.5rem 3rem}
+.stats-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+.stat-block{text-align:center}
+.stat-num{font-family:var(--serif);font-size:clamp(38px,5vw,54px);font-weight:200;color:var(--nb);line-height:1;margin-bottom:6px}
+.stat-num.purple{color:var(--p)}
+.stat-num.green{color:var(--g)}
+.stat-label{font-size:13px;color:var(--wg);font-weight:300;line-height:1.4}
+
+/* ── INTRO + NUMBERED ── */
+.intro-sec{padding:7rem 3rem;max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.intro-tag{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--p);font-weight:500;margin-bottom:1.5rem;display:flex;align-items:center;gap:8px}
+.intro-tag::before{content:'';width:24px;height:0.5px;background:var(--p);display:block}
+.intro-title{font-family:var(--serif);font-size:clamp(30px,4vw,44px);font-weight:300;color:var(--nb);line-height:1.25;margin-bottom:1.5rem}
+.intro-body{font-size:16px;line-height:1.85;color:var(--wg);font-weight:300;margin-bottom:2rem}
+.intro-cta{font-size:14px;color:var(--nb);font-weight:400;display:inline-flex;align-items:center;gap:6px;cursor:pointer;text-decoration:underline;text-underline-offset:4px;transition:color 0.15s}
+.intro-cta:hover{color:var(--p)}
+.nf-list{display:flex;flex-direction:column;gap:0}
+.nf-item{display:flex;gap:1.5rem;padding:1.4rem 0;border-bottom:0.5px solid var(--border);cursor:pointer;transition:padding-left 0.2s}
+.nf-item:first-child{padding-top:0;border-top:0.5px solid var(--border)}
+.nf-item:hover{padding-left:6px}
+.nf-num{font-family:var(--serif);font-size:13px;font-weight:300;color:var(--lg);padding-top:2px;flex-shrink:0;width:24px;transition:color 0.2s}
+.nf-item:hover .nf-num{color:var(--p)}
+.nf-title{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--nb);margin-bottom:4px;transition:color 0.2s}
+.nf-item:hover .nf-title{color:var(--pd)}
+.nf-desc{font-size:13px;color:var(--wg);line-height:1.6;font-weight:300}
+
+/* ── PAIN SECTION ── */
+.pain-sec{padding:6rem 3rem;background:var(--cd);border-top:0.5px solid var(--border)}
+.pain-inner{max-width:860px;margin:0 auto}
+.sec-eyebrow{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--lg);font-weight:500;margin-bottom:1.25rem;text-align:center}
+.sec-title{font-family:var(--serif);font-size:clamp(28px,4vw,44px);font-weight:300;color:var(--nb);line-height:1.25;margin-bottom:3rem;text-align:center;max-width:560px;margin-left:auto;margin-right:auto}
+.pain-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:0.5px solid var(--border);border-radius:12px;overflow:hidden}
+.pain-card{background:var(--white);padding:2rem;transition:background 0.15s;display:flex;flex-direction:column;gap:14px}
+.pain-card:hover{background:var(--cream)}
+.pain-ico-wrap{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pain-ico-wrap.purple{background:var(--pl)}
+.pain-ico-wrap.green{background:var(--gl)}
+.pain-ico-wrap.amber{background:var(--al)}
+.pain-ico-wrap.blue{background:#E6F1FB}
+.pain-card-title{font-family:var(--serif);font-size:17px;font-weight:400;color:var(--nb)}
+.pain-card-desc{font-size:13px;color:var(--wg);line-height:1.65;font-weight:300}
+
+/* ── WAITLIST FORM ── */
+.form-sec{background:var(--nb);padding:7rem 3rem;position:relative;overflow:hidden}
+.form-blob1{position:absolute;top:-200px;right:-100px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(83,74,183,0.14) 0%,transparent 60%);pointer-events:none}
+.form-blob2{position:absolute;bottom:-150px;left:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(29,158,117,0.08) 0%,transparent 60%);pointer-events:none}
+.form-inner{max-width:520px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.form-eyebrow{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1rem;font-weight:500}
+.form-title{font-family:var(--serif);font-size:clamp(40px,6vw,64px);font-weight:200;color:white;line-height:1.1;margin-bottom:1rem;letter-spacing:-0.01em}
+.form-sub{font-size:15px;color:rgba(255,255,255,0.38);line-height:1.75;margin-bottom:2.5rem;font-weight:300}
+.f-field{width:100%;padding:15px 18px;border:0.5px solid rgba(255,255,255,0.1);border-radius:8px;font-size:15px;font-family:var(--sans);background:rgba(255,255,255,0.05);color:white;outline:none;margin-bottom:10px;transition:border-color 0.15s,background 0.15s}
+.f-field::placeholder{color:rgba(255,255,255,0.2)}
+.f-field:focus{border-color:rgba(175,169,236,0.5);background:rgba(255,255,255,0.08)}
+.btn-join{width:100%;padding:17px;background:var(--p);color:white;border:none;border-radius:100px;font-family:var(--sans);font-size:15px;font-weight:400;cursor:pointer;transition:background 0.2s;margin-bottom:14px}
+.btn-join:hover{background:var(--pd)}
+.f-note{font-size:12px;color:rgba(255,255,255,0.18);letter-spacing:0.04em}
+
+/* ── ONBOARDING STEPS (post-form) ── */
+.ob-wrap{display:none;max-width:520px;margin:0 auto;text-align:left;position:relative;z-index:1}
+.ob-progress{margin-bottom:2rem}
+.ob-prog-track{height:2px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;margin-bottom:8px}
+.ob-prog-fill{height:100%;background:var(--pm);border-radius:2px;transition:width 0.4s ease}
+.ob-prog-label{font-size:11px;color:rgba(255,255,255,0.3);display:flex;justify-content:space-between}
+.ob-step{display:none}
+.ob-step.active{display:block;animation:up 0.35s forwards}
+.ob-q{font-family:var(--serif);font-size:26px;font-weight:300;color:white;margin-bottom:6px;line-height:1.3}
+.ob-sub{font-size:14px;color:rgba(255,255,255,0.38);margin-bottom:1.75rem;font-weight:300}
+.ob-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:1.75rem}
+.ob-opt{display:flex;align-items:center;gap:12px;padding:14px 16px;border:0.5px solid rgba(255,255,255,0.1);border-radius:8px;cursor:pointer;transition:all 0.15s;background:transparent}
+.ob-opt:hover{border-color:rgba(255,255,255,0.25);background:rgba(255,255,255,0.04)}
+.ob-opt.sel{border-color:var(--pm);background:rgba(83,74,183,0.18)}
+.ob-opt-marker{width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.2);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
+.ob-opt.sel .ob-opt-marker{background:var(--p);border-color:var(--p)}
+.ob-opt-marker-dot{width:6px;height:6px;border-radius:50%;background:white;opacity:0;transition:opacity 0.15s}
+.ob-opt.sel .ob-opt-marker-dot{opacity:1}
+.ob-opt-label{font-size:14px;font-weight:400;color:rgba(255,255,255,0.6);transition:color 0.15s}
+.ob-opt.sel .ob-opt-label{color:white;font-weight:500}
+.ob-opt-desc{font-size:12px;color:rgba(255,255,255,0.3);font-weight:300}
+.ob-opt.sel .ob-opt-desc{color:rgba(255,255,255,0.5)}
+.ob-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.75rem}
+.ob-btns{display:flex;gap:8px}
+.ob-btn-back{padding:13px 18px;background:none;border:0.5px solid rgba(255,255,255,0.12);border-radius:100px;font-size:13px;color:rgba(255,255,255,0.4);cursor:pointer;font-family:var(--sans);transition:all 0.15s}
+.ob-btn-back:hover{border-color:rgba(255,255,255,0.25);color:rgba(255,255,255,0.6)}
+.ob-btn-next{flex:1;padding:13px 24px;background:var(--p);color:white;border:none;border-radius:100px;font-family:var(--sans);font-size:14px;cursor:pointer;transition:background 0.2s}
+.ob-btn-next:hover{background:var(--pd)}
+
+/* ── ANALYTICS RESULT ── */
+.analytics-wrap{display:none;max-width:560px;margin:0 auto;position:relative;z-index:1}
+.analytics-header{text-align:center;margin-bottom:2rem}
+.analytics-check{width:56px;height:56px;border-radius:50%;border:0.5px solid rgba(29,158,117,0.4);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:22px;color:var(--g)}
+.analytics-title{font-family:var(--serif);font-size:32px;font-weight:200;color:white;margin-bottom:6px}
+.analytics-sub{font-size:14px;color:rgba(255,255,255,0.35);line-height:1.65}
+.analytics-card{background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.08);border-radius:12px;padding:1.5rem;margin-bottom:12px}
+.ac-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);font-weight:500;margin-bottom:12px}
+.ac-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.ac-stat{text-align:center}
+.ac-stat-num{font-family:var(--serif);font-size:28px;font-weight:200;color:white;line-height:1;margin-bottom:4px}
+.ac-stat-num.purple{color:var(--pm)}
+.ac-stat-num.green{color:var(--g)}
+.ac-stat-num.amber{color:#EF9F27}
+.ac-stat-label{font-size:11px;color:rgba(255,255,255,0.35);line-height:1.4}
+.ac-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.ac-bar-label{font-size:12px;color:rgba(255,255,255,0.45);width:120px;flex-shrink:0}
+.ac-bar-track{flex:1;height:4px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden}
+.ac-bar-fill{height:100%;border-radius:2px;transition:width 1s 0.3s ease}
+.bf-purple{background:var(--pm)}
+.bf-green{background:var(--g)}
+.bf-amber{background:#EF9F27}
+.ac-bar-val{font-size:11px;color:rgba(255,255,255,0.4);width:36px;text-align:right;flex-shrink:0}
+.ac-peers{display:flex;gap:-8px;margin-bottom:8px}
+.ac-peer-av{width:28px;height:28px;border-radius:50%;border:2px solid rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;margin-left:-6px;flex-shrink:0}
+.ac-peer-av:first-child{margin-left:0}
+.ac-peer-more{font-size:12px;color:rgba(255,255,255,0.4);margin-left:10px;align-self:center}
+.ac-insight{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;font-style:italic;font-family:var(--serif);padding-top:10px;border-top:0.5px solid rgba(255,255,255,0.06);margin-top:10px}
+.analytics-cta{text-align:center;margin-top:1.5rem}
+.analytics-cta p{font-size:13px;color:rgba(255,255,255,0.3);margin-bottom:10px}
+
+/* ── HOW IT WORKS ── */
+.hiw-sec{padding:7rem 3rem;background:var(--cd);border-top:0.5px solid var(--border)}
+.hiw-inner{max-width:900px;margin:0 auto}
+.hiw-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:0.5px solid var(--border);border-radius:12px;overflow:hidden;margin-top:3rem}
+.hiw-step{background:var(--white);padding:2.5rem 2rem;transition:background 0.15s}
+.hiw-step:hover{background:var(--cream)}
+.hiw-step-n{font-family:var(--serif);font-size:48px;font-weight:200;color:var(--cd);line-height:1;margin-bottom:1.25rem}
+.hiw-step.hl .hiw-step-n{color:var(--pl)}
+.hiw-step-t{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--nb);margin-bottom:8px}
+.hiw-step-d{font-size:14px;color:var(--wg);line-height:1.65;font-weight:300}
+
+/* ── QUOTES ── */
+.quotes-sec{padding:7rem 3rem;background:var(--cream)}
+.quotes-inner{max-width:1000px;margin:0 auto}
+.quotes-eyebrow{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--lg);text-align:center;margin-bottom:3rem;letter-spacing:0.04em}
+.quotes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.q-card{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:2rem;transition:transform 0.15s,border-color 0.15s}
+.q-card:hover{transform:translateY(-2px);border-color:var(--pm)}
+.q-mark{font-family:var(--serif);font-size:48px;font-weight:200;color:var(--cd);line-height:1;margin-bottom:0.5rem}
+.q-text{font-family:var(--serif);font-size:15px;font-style:italic;color:var(--nb);line-height:1.75;margin-bottom:1.5rem;font-weight:300}
+.q-author{display:flex;align-items:center;gap:10px}
+.qav{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0}
+.qa1{background:var(--pl);color:var(--pd)}
+.qa2{background:var(--gl);color:var(--gd)}
+.qa3{background:#FBEAF0;color:#72243E}
+.q-name{font-size:13px;font-weight:500;color:var(--nb)}
+.q-sub{font-size:12px;color:var(--lg)}
+
+/* ── TRUST ── */
+.trust-sec{padding:2.5rem 3rem;background:var(--white);border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border)}
+.trust-inner{max-width:800px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--lg)}
+.trust-ico{width:22px;height:22px;border-radius:5px;background:var(--gl);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.trust-sep{width:0.5px;height:16px;background:var(--border)}
+
+/* ── FINAL CTA ── */
+.final-sec{padding:8rem 3rem;text-align:center;background:var(--cream);position:relative;overflow:hidden}
+.final-blob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(83,74,183,0.05) 0%,transparent 65%);pointer-events:none}
+.final-inner{position:relative;z-index:1}
+.final-eyebrow{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--lg);font-weight:500;margin-bottom:1.5rem}
+.final-title{font-family:var(--serif);font-size:clamp(36px,5vw,60px);font-weight:200;color:var(--nb);line-height:1.15;margin-bottom:1.5rem;max-width:600px;margin-left:auto;margin-right:auto}
+.final-sub{font-size:16px;color:var(--wg);line-height:1.75;margin-bottom:2.5rem;font-weight:300;max-width:420px;margin-left:auto;margin-right:auto}
+.btn-final{display:inline-flex;align-items:center;gap:8px;padding:17px 40px;background:var(--nb);color:white;border:none;border-radius:100px;font-family:var(--sans);font-size:15px;cursor:pointer;transition:background 0.2s}
+.btn-final:hover{background:#2a2a28}
+
+/* ── FOOTER ── */
+footer{background:var(--nb);padding:3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem}
+.f-logo{font-family:var(--serif);font-size:18px;font-weight:300;letter-spacing:3px;color:white}
+.f-logo .io{color:var(--pm);font-size:10px;vertical-align:super;letter-spacing:1px}
+.f-slogan{font-family:var(--serif);font-size:13px;font-style:italic;color:rgba(255,255,255,0.3)}
+.f-right{font-size:12px;color:rgba(255,255,255,0.3)}
+.f-right a{color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.15s}
+.f-right a:hover{color:white}
+
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:768px){
+  nav{padding:0 1.25rem}.nav-count{display:none}
+  .hero{padding:4rem 1.25rem 3rem}
+  .stats-bar{padding:2rem 1.25rem}.stats-inner{grid-template-columns:repeat(2,1fr);gap:1.5rem}
+  .intro-sec{grid-template-columns:1fr;gap:3rem;padding:5rem 1.25rem}
+  .pain-sec{padding:5rem 1.25rem}.pain-grid{grid-template-columns:1fr}
+  .form-sec{padding:5rem 1.25rem}
+  .ob-grid{grid-template-columns:1fr 1fr}
+  .hiw-sec{padding:5rem 1.25rem}.hiw-steps{grid-template-columns:1fr}
+  .quotes-sec{padding:5rem 1.25rem}.quotes-grid{grid-template-columns:1fr}
+  .trust-inner{gap:1.5rem}.trust-sep{display:none}
+  .final-sec{padding:5rem 1.25rem}
+  footer{padding:2rem 1.25rem;flex-direction:column;text-align:center}
+  .ac-stat-row{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">pave<span class="io">.io</span></a>
+  <div class="nav-r">
+    <div class="nav-count"><div class="nav-count-dot"></div><span><strong style="color:var(--nb);font-weight:500">312</strong> on the waitlist</span></div>
+    <button class="nav-cta" onclick="document.getElementById('form-sec').scrollIntoView({behavior:'smooth'})">join the waitlist</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob1"></div><div class="hero-blob2"></div>
+  <div class="hero-badge"><div class="hero-badge-dot"></div>surrogacy · clarity · community</div>
+  <h1 class="hero-wm">pave<span class="io">.io</span></h1>
+  <div class="hero-rule"></div>
+  <div class="hero-slogan">pave your path to parenthood.</div>
+  <p class="hero-sub">clarity for the most complex — and exciting — journey of your life. the roadmap, the costs, the timeline and advisors, all in one place.</p>
+  <div class="hero-btns">
+    <button class="btn-hero" onclick="document.getElementById('form-sec').scrollIntoView({behavior:'smooth'})">join the waitlist →</button>
+    <button class="btn-ghost" onclick="document.getElementById('hiw').scrollIntoView({behavior:'smooth'})">see how it works</button>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-block"><div class="stat-num purple">312</div><div class="stat-label">pavers on the waitlist</div></div>
+    <div class="stat-block"><div class="stat-num">2</div><div class="stat-label">countries — israel + usa</div></div>
+    <div class="stat-block"><div class="stat-num green">$0</div><div class="stat-label">commissions, ever</div></div>
+    <div class="stat-block"><div class="stat-num">6</div><div class="stat-label">phases mapped for you</div></div>
+  </div>
+</div>
+
+<!-- INTRO + NUMBERED -->
+<section class="intro-sec">
+  <div>
+    <div class="intro-tag">what is pave</div>
+    <h2 class="intro-title">built for the most important journey of your life.</h2>
+    <p class="intro-body">The surrogacy journey is long, expensive, and completely overwhelming. No roadmap. No cost transparency. No community. Pave changes all of that — one place, built purely for you.</p>
+    <span class="intro-cta" onclick="document.getElementById('form-sec').scrollIntoView({behavior:'smooth'})">get early access →</span>
+  </div>
+  <div class="nf-list">
+    <div class="nf-item"><div class="nf-num">01</div><div><div class="nf-title">your personal roadmap</div><div class="nf-desc">every phase, every step, your exact position — always visible.</div></div></div>
+    <div class="nf-item"><div class="nf-num">02</div><div><div class="nf-title">real cost tracking</div><div class="nf-desc">log every expense, see what's coming. no more surprises.</div></div></div>
+    <div class="nf-item"><div class="nf-num">03</div><div><div class="nf-title">ai agent — powered by claude</div><div class="nf-desc">ask anything. it knows your journey, documents, and budget.</div></div></div>
+    <div class="nf-item"><div class="nf-num">04</div><div><div class="nf-title">my team</div><div class="nf-desc">your clinic, doctors, lawyers — all in one place.</div></div></div>
+  </div>
+</section>
+
+<!-- PAIN — SVG ICONS -->
+<section class="pain-sec">
+  <div class="pain-inner">
+    <div class="sec-eyebrow">sound familiar?</div>
+    <div class="sec-title">the surrogacy journey is long, expensive, and completely overwhelming.</div>
+    <div class="pain-grid">
+
+      <div class="pain-card">
+        <div class="pain-ico-wrap purple">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 19L6 13l4 3 4-7 4 4"/><circle cx="18" cy="9" r="2" fill="#534AB7" stroke="none"/>
+          </svg>
+        </div>
+        <div class="pain-card-title">no roadmap</div>
+        <div class="pain-card-desc">nobody shows you the full picture — what's coming next, how long it takes, what to prepare for.</div>
+      </div>
+
+      <div class="pain-card">
+        <div class="pain-ico-wrap amber">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#BA7517" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="6" width="18" height="13" rx="2"/><path d="M7 6V4a4 4 0 018 0v2"/><path d="M11 13v-2m0 4h.01"/>
+          </svg>
+        </div>
+        <div class="pain-card-title">no cost clarity</div>
+        <div class="pain-card-desc">you find out what things cost only after you've committed. no transparency, no tracking.</div>
+      </div>
+
+      <div class="pain-card">
+        <div class="pain-ico-wrap green">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="8" cy="8" r="4"/><path d="M2 20c0-3.3 2.7-6 6-6"/><circle cx="16" cy="16" r="4"/><path d="M12 20h8M16 12v8"/>
+          </svg>
+        </div>
+        <div class="pain-card-title">completely alone</div>
+        <div class="pain-card-desc">it feels like you're the only one doing this. there's nobody to compare notes with or lean on.</div>
+      </div>
+
+      <div class="pain-card">
+        <div class="pain-ico-wrap blue">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#185FA5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13h4M9 17h4M9 9h1"/>
+          </svg>
+        </div>
+        <div class="pain-card-title">information everywhere</div>
+        <div class="pain-card-desc">dozens of sources, agencies, clinics, forums — all contradicting each other. no single truth.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST + ONBOARDING + ANALYTICS -->
+<section class="form-sec" id="form-sec">
+  <div class="form-blob1"></div><div class="form-blob2"></div>
+
+  <!-- Step 0: Email capture -->
+  <div class="form-inner" id="step-email">
+    <div class="form-eyebrow">early access · limited spots</div>
+    <div class="form-title">get on pave.</div>
+    <div class="form-sub">pave gives you the roadmap, the costs, the timeline and advisors — so you can focus on what matters. answer 4 quick questions and we'll send you a personalized snapshot.</div>
+    <input class="f-field" id="f-name" type="text" placeholder="your first name"/>
+    <input class="f-field" id="f-email" type="email" placeholder="your email address"/>
+    <button class="btn-join" onclick="startOb()">continue →</button>
+    <div class="f-note">no spam. no agencies. just pave.</div>
+  </div>
+
+  <!-- Onboarding questions -->
+  <div class="ob-wrap" id="ob-wrap">
+    <div class="ob-progress">
+      <div class="ob-prog-track"><div class="ob-prog-fill" id="ob-fill" style="width:0%"></div></div>
+      <div class="ob-prog-label"><span id="ob-step-lbl">question 1 of 4</span><span id="ob-pct">0%</span></div>
+    </div>
+
+    <!-- Q1: Who -->
+    <div class="ob-step active" id="obs-0">
+      <div class="ob-q">who are you on this journey?</div>
+      <div class="ob-sub">we'll tailor your snapshot to people exactly like you.</div>
+      <div class="ob-opts">
+        <div class="ob-opt sel" id="w0" onclick="selOb('w',0,4)"><div class="ob-opt-marker"><div class="ob-opt-marker-dot"></div></div><div><div class="ob-opt-label">solo dad</div><div class="ob-opt-desc">doing this on my own</div></div></div>
+        <div class="ob-opt" id="w1" onclick="selOb('w',1,4)"><div class="ob-opt-marker"><div class="ob-opt-marker-dot"></div></div><div><div class="ob-opt-label">solo mom</div><div class="ob-opt-desc">doing this on my own</div></div></div>
+        <div class="ob-opt" id="w2" onclick="selOb('w',2,4)"><div class="ob-opt-marker"><div class="ob-opt-marker-dot"></div></div><div><div class="ob-opt-label">same-sex couple</div><div class="ob-opt-desc">going through this together</div></div></div>
+        <div class="ob-opt" id="w3" onclick="selOb('w',3,4)"><div class="ob-opt-marker"><div class="ob-opt-marker-dot"></div></div><div><div class="ob-opt-label">couple</div><div class="ob-opt-desc">going through this together</div></div></div>
+      </div>
+      <div class="ob-btns"><button class="ob-btn-next" onclick="obGo(1)">continue →</button></div>
+    </div>
+
+    <!-- Q2: Country -->
+    <div class="ob-step" id="obs-1">
+      <div class="ob-q">where are you based?</div>
+      <div class="ob-sub">this shapes your legal context, clinic options, and cost estimates.</div>
+      <div class="ob-opts">
+        <div class="ob-opt sel" id="c0" onclick="selOb('c',0,3)"><div class="ob-opt-marker"><div class="ob-opt-marker-dot"></div></div><div><div class="ob-opt-label">israel</div><div class="ob-opt-desc">government-funded ivf · surrogacy legal since 2022</div></div></div>
+        <div class="ob-opt" id="c1" onclick="selOb('c',1,3)"><div class="ob-opt-marker"><div class="ob-opt-marker-dot"></div></div><div><div class="ob-opt-label">united states</div><div class="ob-opt-desc">most established surrogacy market globally</div></div></div>
+        <div class="ob-opt" id="c2" onclick="selOb('c',2,3)"><div class="ob-opt-marker"><div class="ob-opt-marker-dot"></div></div><div><div class="ob-opt-label">both — israel + usa</div><div class="ob-opt-desc">using clinics or agencies in both countries</div></div></div>
+      </div>
+      <div class="ob-btns"><button class="ob-btn-back" onclick="obGo(0)">← back</button><button class="ob-btn-next" onclick="obGo(2)">continue →</button></div>
+    </div>
+
+    <!-- Q3: Stage -->
+    <div class="ob-step" id="obs-2">
+      <div class="ob-q">where are you in the process?</div>
+      <div class="ob-sub">be honest — there's no wrong answer. we start from exactly here.</div>
+      <div class="ob-opts">
+        <div class="ob-opt" id="s0" onclick="selOb('s',0,5)"><div class="ob-opt-marker"><div class="ob-opt-marker-dot"></div></div><div><div class="ob-opt-label">just researching</div><div class="ob-opt-desc">haven't started anything yet</div></div></div>
+        <div class="ob-opt sel" id="s1" onclick="selOb('s',1,5)"><div class="ob-opt-marker"><div class="ob-opt-marker-dot"></div></div><div><div class="ob-opt-label">fertility testing</div><div class="ob-opt-desc">sperm analysis, hormones, screening</div></div></div>
+        <div class="ob-opt" id="s2" onclick="selOb('s',2,5)"><div class="ob-opt-marker"><div class="ob-opt-marker-dot"></div></div><div><div class="ob-opt-label">egg donor selected</div><div class="ob-opt-desc">embryo creation in progress</div></div></div>
+        <div class="ob-opt" id="s3" onclick="selOb('s',3,5)"><div class="ob-opt-marker"><div class="ob-opt-marker-dot"></div></div><div><div class="ob-opt-label">looking for a surrogate</div><div class="ob-opt-desc">embryos ready or almost ready</div></div></div>
+        <div class="ob-opt" id="s4" onclick="selOb('s',4,5)"><div class="ob-opt-marker"><div class="ob-opt-marker-dot"></div></div><div><div class="ob-opt-label">surrogate matched or beyond</div><div class="ob-opt-desc">transfer, pregnancy, or later</div></div></div>
+      </div>
+      <div class="ob-btns"><button class="ob-btn-back" onclick="obGo(1)">← back</button><button class="ob-btn-next" onclick="obGo(3)">continue →</button></div>
+    </div>
+
+    <!-- Q4: Budget awareness -->
+    <div class="ob-step" id="obs-3">
+      <div class="ob-q">how much do you know about the costs?</div>
+      <div class="ob-sub">surrogacy is expensive. pave helps you plan, track, and never be surprised.</div>
+      <div class="ob-opts">
+        <div class="ob-opt" id="b0" onclick="selOb('b',0,4)"><div class="ob-opt-marker"><div class="ob-opt-marker-dot"></div></div><div><div class="ob-opt-label">i have no idea</div><div class="ob-opt-desc">need full transparency from scratch</div></div></div>
+        <div class="ob-opt sel" id="b1" onclick="selOb('b',1,4)"><div class="ob-opt-marker"><div class="ob-opt-marker-dot"></div></div><div><div class="ob-opt-label">i have a rough idea</div><div class="ob-opt-desc">know it's expensive but not the details</div></div></div>
+        <div class="ob-opt" id="b2" onclick="selOb('b',2,4)"><div class="ob-opt-marker"><div class="ob-opt-marker-dot"></div></div><div><div class="ob-opt-label">i know the main costs</div><div class="ob-opt-desc">researched it, want a tracker</div></div></div>
+        <div class="ob-opt" id="b3" onclick="selOb('b',3,4)"><div class="ob-opt-marker"><div class="ob-opt-marker-dot"></div></div><div><div class="ob-opt-label">i track everything already</div><div class="ob-opt-desc">need a better tool</div></div></div>
+      </div>
+      <div class="ob-btns"><button class="ob-btn-back" onclick="obGo(2)">← back</button><button class="ob-btn-next" onclick="showAnalytics()">show my snapshot →</button></div>
+    </div>
+  </div>
+
+  <!-- Analytics result -->
+  <div class="analytics-wrap" id="analytics-wrap">
+    <div class="analytics-header">
+      <div class="analytics-check">✓</div>
+      <div class="analytics-title" id="a-title">you're on the list.</div>
+      <div class="analytics-sub" id="a-sub">here's a snapshot of people like you on pave right now.</div>
+    </div>
+
+    <!-- People like you -->
+    <div class="analytics-card">
+      <div class="ac-label">pavers like you</div>
+      <div class="ac-stat-row">
+        <div class="ac-stat"><div class="ac-stat-num purple" id="a-similar">41</div><div class="ac-stat-label">at your exact stage</div></div>
+        <div class="ac-stat"><div class="ac-stat-num green" id="a-country-count">23</div><div class="ac-stat-label" id="a-country-label">in israel</div></div>
+        <div class="ac-stat"><div class="ac-stat-num amber" id="a-profile-count">8</div><div class="ac-stat-label" id="a-profile-label">solo dads like you</div></div>
+      </div>
+      <div style="margin-top:1rem;display:flex;align-items:center;gap:0">
+        <div class="ac-peers">
+          <div class="ac-peer-av" style="background:var(--pl);color:var(--pd)">DK</div>
+          <div class="ac-peer-av" style="background:var(--gl);color:var(--gd)">TM</div>
+          <div class="ac-peer-av" style="background:var(--al);color:var(--a)">YL</div>
+          <div class="ac-peer-av" style="background:#FBEAF0;color:#72243E">RB</div>
+          <div class="ac-peer-av" style="background:var(--pl);color:var(--pd)">AS</div>
+        </div>
+        <div class="ac-peer-more" id="a-peer-more">+36 more right now</div>
+      </div>
+      <div class="ac-insight" id="a-insight">"most people at this stage took 3–5 months before moving to surrogate matching."</div>
+    </div>
+
+    <!-- Timeline estimate -->
+    <div class="analytics-card">
+      <div class="ac-label">estimated timeline from your stage</div>
+      <div class="ac-bar-row"><div class="ac-bar-label" id="a-phase-label">embryo creation</div><div class="ac-bar-track"><div class="ac-bar-fill bf-purple" id="a-bar-1" style="width:0%"></div></div><div class="ac-bar-val">now</div></div>
+      <div class="ac-bar-row"><div class="ac-bar-label">surrogate search</div><div class="ac-bar-track"><div class="ac-bar-fill bf-green" id="a-bar-2" style="width:0%"></div></div><div class="ac-bar-val" id="a-t2">+4 mo</div></div>
+      <div class="ac-bar-row"><div class="ac-bar-label">transfer & pregnancy</div><div class="ac-bar-track"><div class="ac-bar-fill bf-amber" id="a-bar-3" style="width:0%"></div></div><div class="ac-bar-val" id="a-t3">+10 mo</div></div>
+      <div class="ac-bar-row"><div class="ac-bar-label">your child home</div><div class="ac-bar-track"><div class="ac-bar-fill" style="background:white;opacity:0.15;width:0%" id="a-bar-4"></div></div><div class="ac-bar-val" id="a-t4">+24 mo</div></div>
+    </div>
+
+    <!-- Budget estimate -->
+    <div class="analytics-card">
+      <div class="ac-label">budget snapshot — based on your profile</div>
+      <div class="ac-stat-row" style="margin-bottom:1rem">
+        <div class="ac-stat"><div class="ac-stat-num purple" id="a-spent">$18k</div><div class="ac-stat-label">avg. spent so far</div></div>
+        <div class="ac-stat"><div class="ac-stat-num amber" id="a-remaining">$95k</div><div class="ac-stat-label">est. remaining</div></div>
+        <div class="ac-stat"><div class="ac-stat-num green" id="a-total">$113k</div><div class="ac-stat-label">est. total</div></div>
+      </div>
+      <div class="ac-insight" id="a-budget-insight">"people at your stage in israel typically spend $90k–$130k total. pave helps you track every shekel."</div>
+    </div>
+
+    <div class="analytics-cta">
+      <p>pave launches soon in israel + usa. you'll be among the first to know.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="hiw-sec" id="hiw">
+  <div class="hiw-inner">
+    <div class="sec-eyebrow">how it works</div>
+    <div class="sec-title">from zero to clarity in minutes.</div>
+    <div class="hiw-steps">
+      <div class="hiw-step"><div class="hiw-step-n">01</div><div class="hiw-step-t">tell us about you</div><div class="hiw-step-d">answer 6 quick questions — who you are, where you are, your country, your stage.</div></div>
+      <div class="hiw-step hl"><div class="hiw-step-n">02</div><div class="hiw-step-t">get your roadmap</div><div class="hiw-step-d">instantly see your personal surrogacy roadmap — every phase, every step, real cost estimates.</div></div>
+      <div class="hiw-step"><div class="hiw-step-n">03</div><div class="hiw-step-t">never feel lost again</div><div class="hiw-step-d">track progress, log expenses, ask the ai agent, manage your team — all in one place.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTES -->
+<section class="quotes-sec">
+  <div class="quotes-inner">
+    <div class="quotes-eyebrow">from people on the journey</div>
+    <div class="quotes-grid">
+      <div class="q-card"><div class="q-mark">"</div><div class="q-text">i spent 3 months just figuring out where to start. something like pave would have saved me so much confusion and money.</div><div class="q-author"><div class="qav qa1">DM</div><div><div class="q-name">daniel m.</div><div class="q-sub">solo dad · tel aviv</div></div></div></div>
+      <div class="q-card"><div class="q-mark">"</div><div class="q-text">nobody tells you how much this costs until you're already deep in it. total transparency from day one changes everything.</div><div class="q-author"><div class="qav qa2">SR</div><div><div class="q-name">sarah r.</div><div class="q-sub">solo mom · new york</div></div></div></div>
+      <div class="q-card"><div class="q-mark">"</div><div class="q-text">knowing others are at the same stage, in the same country — that matters more than people think.</div><div class="q-author"><div class="qav qa3">TK</div><div><div class="q-name">tom & kevin</div><div class="q-sub">same-sex couple · san francisco</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<div class="trust-sec">
+  <div class="trust-inner">
+    <div class="trust-item"><div class="trust-ico"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="5" width="8" height="6" rx="1"/><path d="M4 5V3.5a2 2 0 014 0V5"/></svg></div>end-to-end encrypted</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><div class="trust-ico"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round"><circle cx="6" cy="6" r="4"/><path d="M4 4l4 4M8 4l-4 4"/></svg></div>zero data selling</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><div class="trust-ico"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg></div>zero commissions</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><div class="trust-ico"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round"><polyline points="2,6 5,9 10,3"/></svg></div>gdpr compliant</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><div class="trust-ico"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round"><path d="M6 1l1 3h3l-2.5 2 1 3L6 7.5 3.5 9l1-3L2 4h3z"/></svg></div>delete your data anytime</div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<section class="final-sec">
+  <div class="final-blob"></div>
+  <div class="final-inner">
+    <div class="final-eyebrow">join the waitlist</div>
+    <h2 class="final-title">clarity for the most complex — and exciting — journey of your life.</h2>
+    <p class="final-sub">pave gives you the roadmap, the costs, the timeline and advisors — so you can focus on what matters.</p>
+    <button class="btn-final" onclick="document.getElementById('form-sec').scrollIntoView({behavior:'smooth'})">get on pave →</button>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">pave<span class="io">.io</span></div>
+  <div class="f-slogan">pave your path to parenthood.</div>
+  <div class="f-right"><a href="mailto:hello@onpave.io">hello@onpave.io</a> · onpave.io</div>
+</footer>
+
+<script>
+var curStep=0;
+var answers={who:0,country:0,stage:1,budget:1};
+
+function selOb(grp,idx,count){
+  for(var i=0;i<count;i++){var e=document.getElementById(grp+i);if(e)e.classList.remove('sel');}
+  var t=document.getElementById(grp+idx);if(t)t.classList.add('sel');
+  answers[grp=='w'?'who':grp=='c'?'country':grp=='s'?'stage':'budget']=idx;
+}
+
+function obGo(n){
+  document.querySelectorAll('.ob-step').forEach(function(s){s.classList.remove('active')});
+  document.getElementById('obs-'+n).classList.add('active');
+  curStep=n;
+  var total=4;
+  var pct=Math.round((n/total)*100);
+  document.getElementById('ob-fill').style.width=pct+'%';
+  document.getElementById('ob-step-lbl').textContent='question '+(n+1)+' of '+total;
+  document.getElementById('ob-pct').textContent=pct+'%';
+  window.scrollTo({top:document.getElementById('form-sec').offsetTop-80,behavior:'smooth'});
+}
+
+function startOb(){
+  var name=document.getElementById('f-name').value.trim();
+  var email=document.getElementById('f-email').value.trim();
+  var nf=document.getElementById('f-name'),ef=document.getElementById('f-email');
+  nf.style.borderColor='';ef.style.borderColor='';
+  if(!name){nf.style.borderColor='rgba(226,75,74,0.5)';return;}
+  if(!email||email.indexOf('@')<0){ef.style.borderColor='rgba(226,75,74,0.5)';return;}
+  document.getElementById('step-email').style.display='none';
+  document.getElementById('ob-wrap').style.display='block';
+  window.scrollTo({top:document.getElementById('form-sec').offsetTop-80,behavior:'smooth'});
+}
+
+function showAnalytics(){
+  document.getElementById('ob-wrap').style.display='none';
+  document.getElementById('analytics-wrap').style.display='block';
+
+  var whoLabels=['solo dad','solo mom','same-sex couple','couple'];
+  var countryLabels=['israel','united states','israel + usa'];
+  var stageLabels=['just researching','fertility testing','egg donor selected','looking for a surrogate','surrogate matched'];
+  var who=answers.who, country=answers.country, stage=answers.stage;
+
+  // Personalize title
+  var name=document.getElementById('f-name').value.trim();
+  document.getElementById('a-title').textContent=name ? 'you\'re on the list, '+name+'.' : 'you\'re on the list.';
+  document.getElementById('a-sub').textContent='here\'s a snapshot of '+whoLabels[who]+'s like you on pave right now.';
+
+  // People counts (simulated data)
+  var similarData=[[41,38,31,28],[23,19,35,12],[8,5,14,22],[18,11,29,7],[9,4,12,3]];
+  var countryData=[[23,31,18],[14,22,11],[7,15,9]];
+  var profileData=[[8,5,14,22],[4,3,9,15],[2,1,6,11],[6,4,12,18],[3,2,7,9]];
+  var similar=similarData[stage]?similarData[stage][who]||41:41;
+  var countryCount=countryData[country]?countryData[country][who]||23:23;
+  var profileCount=profileData[stage]?profileData[stage][who]||8:8;
+
+  document.getElementById('a-similar').textContent=similar;
+  document.getElementById('a-country-count').textContent=countryCount;
+  document.getElementById('a-country-label').textContent='in '+countryLabels[country];
+  document.getElementById('a-profile-count').textContent=profileCount;
+  document.getElementById('a-profile-label').textContent=whoLabels[who]+'s like you';
+  document.getElementById('a-peer-more').textContent='+'+(similar-5)+' more right now';
+
+  // Stage-based insights
+  var insights=[
+    '"most people at this stage spend 2–3 months before beginning fertility testing."',
+    '"people at this stage typically move to egg donor selection in 1–3 months."',
+    '"most people at your stage move to surrogate search in 3–5 months."',
+    '"surrogate matching typically takes 3–6 months at this stage."',
+    '"people at this stage are typically 12–18 months from bringing their child home."'
+  ];
+  document.getElementById('a-insight').textContent=insights[stage]||insights[2];
+  document.getElementById('a-phase-label').textContent=stageLabels[stage];
+
+  // Timeline bars
+  var timelines=[[100,60,35,18],[100,65,40,20],[85,100,55,28],[50,85,100,52],[20,45,80,100]];
+  var t=timelines[stage]||timelines[2];
+  var timeLabels=[
+    ['+1 mo','+6 mo','+12 mo','+20 mo'],
+    ['+2 mo','+7 mo','+13 mo','+22 mo'],
+    ['now','+4 mo','+10 mo','+24 mo'],
+    ['now','+3 mo','+9 mo','+22 mo'],
+    ['now','+2 mo','+8 mo','+18 mo']
+  ];
+  var tl=timeLabels[stage]||timeLabels[2];
+  setTimeout(function(){
+    document.getElementById('a-bar-1').style.width=t[0]+'%';
+    document.getElementById('a-bar-2').style.width=t[1]+'%';
+    document.getElementById('a-bar-3').style.width=t[2]+'%';
+    document.getElementById('a-bar-4').style.width=t[3]+'%';
+  },300);
+  document.getElementById('a-t2').textContent=tl[1];
+  document.getElementById('a-t3').textContent=tl[2];
+  document.getElementById('a-t4').textContent=tl[3];
+
+  // Budget by country and stage
+  var budgets=[
+    {spent:'$2k',rem:'$115k',total:'$117k',insight:'"people just starting in '+countryLabels[country]+' typically spend $100k–$130k total on surrogacy."'},
+    {spent:'$5k',rem:'$108k',total:'$113k',insight:'"at the fertility testing stage in '+countryLabels[country]+', most pavers have spent $3k–$8k so far."'},
+    {spent:'$18k',rem:'$95k',total:'$113k',insight:'"people at your stage in '+countryLabels[country]+' typically spend $90k–$130k total. pave helps you track every dollar."'},
+    {spent:'$35k',rem:'$78k',total:'$113k',insight:'"at surrogate search stage, most pavers have $70k–$90k remaining. agency fees are next."'},
+    {spent:'$55k',rem:'$58k',total:'$113k',insight:'"you\'re over halfway there on costs. transfer and pregnancy are the biggest remaining expenses."'}
+  ];
+  var b=budgets[stage]||budgets[2];
+  document.getElementById('a-spent').textContent=b.spent;
+  document.getElementById('a-remaining').textContent=b.rem;
+  document.getElementById('a-total').textContent=b.total;
+  document.getElementById('a-budget-insight').textContent=b.insight;
+
+  window.scrollTo({top:document.getElementById('form-sec').offsetTop-80,behavior:'smooth'});
+}
+
+// Scroll animations
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}
+  });
+},{threshold:0.1});
+document.querySelectorAll('.stat-block,.nf-item,.pain-card,.hiw-step,.q-card,.trust-item').forEach(function(el,i){
+  el.style.opacity='0';el.style.transform='translateY(14px)';
+  el.style.transition='opacity 0.6s '+(i*0.07)+'s ease, transform 0.6s '+(i*0.07)+'s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
