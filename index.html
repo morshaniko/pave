@@ -574,23 +574,8 @@ function startOb(){
 }
 
 function saveToAirtable(data){
-  var notes=[
-    'Email: '+data.email,
-    'Who: '+data.who,
-    'Country: '+data.country,
-    'Stage: '+data.stage,
-    'Budget: '+data.budget,
-    'Date: '+new Date().toISOString().split('T')[0]
-  ].join('
-');
-  fetch('https://api.airtable.com/v0/appXWZeg1ZkVLD8Dl/Table%201',{
-    method:'POST',
-    headers:{
-      'Authorization':'Bearer pateoD4xShzMIvtfL.54cf4759792ddf5de5cc754fa41201e15f0851d4a4e06107b2e799eab827053a',
-      'Content-Type':'application/json'
-    },
-    body:JSON.stringify({fields:{'Name':data.name,'Notes':notes}})
-  }).then(function(r){return r.json()}).then(function(d){console.log('Airtable saved:',d)}).catch(function(e){console.log('Airtable error:',e)});
+  var notes='Email: '+data.email+' | Who: '+data.who+' | Country: '+data.country+' | Stage: '+data.stage+' | Budget: '+data.budget+' | Date: '+new Date().toISOString().split('T')[0];
+  fetch('https://api.airtable.com/v0/appXWZeg1ZkVLD8Dl/Table%201',{method:'POST',headers:{'Authorization':'Bearer pateoD4xShzMIvtfL.54cf4759792ddf5de5cc754fa41201e15f0851d4a4e06107b2e799eab827053a','Content-Type':'application/json'},body:JSON.stringify({fields:{'Name':data.name,'Notes':notes}})}).then(function(r){return r.json()}).then(function(d){console.log('saved',d)}).catch(function(e){console.log('err',e)});
 }
 
 function showAnalytics(){
